@@ -53,5 +53,9 @@ func move_state(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
 
-func attack_state(delta: float):
-	animationPlayer.play("AttackRight")
+func attack_state(delta: float) -> void:
+	velocity = Vector2.ZERO
+	animationState.travel("Attack")
+
+func attack_animation_finished() -> void:
+	state = MOVE
