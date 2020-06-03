@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 var knockback = Vector2.ZERO
 
+onready var stats = $Stats
+
 func _physics_process(delta: float) -> void:
 	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
 	knockback = move_and_slide(knockback)
