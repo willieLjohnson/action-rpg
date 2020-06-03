@@ -57,5 +57,8 @@ func attack_state(delta: float) -> void:
 	velocity = Vector2.ZERO
 	animationState.travel("Attack")
 
+func roll_animation_finished() -> void:\
+	state = MOVE
+	
 func attack_animation_finished() -> void:
 	state = MOVE
