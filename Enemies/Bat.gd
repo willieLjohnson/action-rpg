@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 			
 		CHASE: 
 			var player = playerDetectionZone.player
-			if player != null:
+			if player:
 				var direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			else:
