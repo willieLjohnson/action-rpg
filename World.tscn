@@ -488,9 +488,10 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 160, 90 )
+scale = Vector2( 1.96076, 2.37548 )
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 180 )
+region_rect = Rect2( 0, 0, 512, 288 )
 
 [node name="DirtPathTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -503,12 +504,15 @@ tile_set = SubResource( 49 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -65534, 0, 196608, -65533, 0, 196609, -65532, 0, 196609, -65531, 0, 196609, -65530, 0, 196609, -65529, 0, 196609, -65528, 0, 6, -65527, 0, 2, 0, 0, 4, 1, 0, 196610, 8, 0, 131072, 9, 0, 196613, 10, 0, 7, 131071, 0, 4, 65536, 0, 196615, 65546, 0, 65540, 196607, 0, 65540, 131082, 0, 65539, 262143, 0, 65539, 196617, 0, 4, 196618, 0, 196615, 327679, 0, 65539, 262153, 0, 65539, 393215, 0, 196612, 327680, 0, 196609, 327681, 0, 196609, 327682, 0, 196609, 327683, 0, 196609, 327684, 0, 196609, 327685, 0, 7, 327689, 0, 65540, 393221, 0, 196612, 393222, 0, 196609, 393223, 0, 196609, 393224, 0, 196609, 393225, 0, 196615 )
+tile_data = PoolIntArray( -65534, 0, 196611, -65529, 0, 196608, -65528, 0, 6, -65527, 0, 2, 0, 0, 4, 1, 0, 196610, 8, 0, 131072, 9, 0, 196613, 10, 0, 196610, 131071, 0, 4, 65536, 0, 196615, 196607, 0, 65540, 262143, 0, 131075, 196617, 0, 4, 196618, 0, 196610, 262153, 0, 65539, 327680, 0, 196608, 327681, 0, 196609, 327682, 0, 196609, 327683, 0, 196609, 327684, 0, 196609, 327685, 0, 7, 327689, 0, 65540, 393221, 0, 131075, 393224, 0, 196608, 393225, 0, 196615 )
 
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 120, 72 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+current = true
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -601,7 +605,7 @@ position = Vector2( 261.684, 72.2151 )
 position = Vector2( 61.543, 93.0631 )
 
 [node name="Bat4" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 157.444, 18.4736 )
+position = Vector2( 81.0011, 8.74459 )
 
 [node name="Bat2" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 208, 160 )
