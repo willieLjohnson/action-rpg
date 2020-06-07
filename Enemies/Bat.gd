@@ -5,6 +5,7 @@ const ENEMY_DEATH_EFFECT = preload("res://Effects/EnemyDeathEffect.tscn")
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
 export var FRICTION = 200
+export var WANDER_TARGET_RANGE = 4
 
 enum {
 	IDLE,
@@ -23,6 +24,9 @@ onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtbox = $HurtBox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
+
+func _ready() -> void:
+	state = pick_random_state([IDLE, WANDER])
 
 func _physics_process(delta: float) -> void:
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -45,7 +49,12 @@ func _physics_process(delta: float) -> void:
 				
 			var direction = global_position.direction_to(wanderController.target_position)
 			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+			sprite.flip_h = velocity.x < 0
 			
+			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE:
+				state = pick_random_state([IDLE, WANDER])
+				wanderController.start_wander_timer(rand_range(1, 3))
+				
 		CHASE: 
 			var player = playerDetectionZone.player
 			if player:
