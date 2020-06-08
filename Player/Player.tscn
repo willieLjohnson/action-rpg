@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://Shadows/MediumShadow.png" type="Texture" id=6]
 [ext_resource path="res://Music and Sounds/Swipe.wav" type="AudioStream" id=7]
 [ext_resource path="res://Music and Sounds/Evade.wav" type="AudioStream" id=8]
+[ext_resource path="res://Common/WhiteColorShader.shader" type="Shader" id=9]
+
+[sub_resource type="ShaderMaterial" id=50]
+shader = ExtResource( 9 )
+shader_param/active = false
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -723,6 +728,14 @@ height = 15.0
 radius = 5.9173
 height = 4.31264
 
+[sub_resource type="Animation" id=48]
+resource_name = "Start"
+length = 0.2
+
+[sub_resource type="Animation" id=49]
+resource_name = "Stop"
+length = 0.1
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -732,6 +745,7 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 50 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
@@ -793,6 +807,10 @@ shape = SubResource( 47 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Start = SubResource( 48 )
+anims/Stop = SubResource( 49 )
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 
 [editable path="HitboxPivot/SwordHitbox"]
