@@ -19,10 +19,12 @@ var roll_vector = Vector2.DOWN
 var stats = PlayerStats
 
 onready var animationPlayer = $AnimationPlayer
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $HurtBox
+
 
 func _ready() -> void:
 	randomize()
@@ -95,3 +97,11 @@ func _on_HurtBox_area_entered(_area: Area2D) -> void:
 	hurtbox.create_hit_effect()
 	var playerHurtSound = PLAYER_HURT_SOUND.instance()
 	get_tree().current_scene.add_child(playerHurtSound)
+
+
+func _on_HurtBox_invincibility_started() -> void:
+	blinkAnimationPlayer.play("Start")
+
+
+func _on_HurtBox_invincibility_ended() -> void:
+	blinkAnimationPlayer.play("Stop")
