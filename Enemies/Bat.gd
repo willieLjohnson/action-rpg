@@ -24,6 +24,7 @@ onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtbox = $HurtBox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
+onready var animationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	state = pick_random_state([IDLE, WANDER])
@@ -80,9 +81,18 @@ func _on_HurtBox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage
 	knockback =  area.knockback_vector * 120
 	hurtbox.create_hit_effect()
+	hurtbox.start_invincibility(0.4)
 
 func _on_Stats_no_health() -> void:
 	queue_free()
 	var enemyDeathEffect = ENEMY_DEATH_EFFECT.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
+
+
+func _on_HurtBox_invincibility_started() -> void:
+	animationPlayer.play("Start")
+
+
+func _on_HurtBox_invincibility_ended() -> void:
+	animationPlayer.play("Stop")
