@@ -67,7 +67,9 @@ func move_state(delta: float) -> void:
 	
 	if input_vector.y != 0 && input_vector.x == 0:
 		rotation /= 2
+		set_scale(Vector2(get_scale().x, 0.95))
 	else:
+		set_scale(Vector2(1, 1))
 		rotate(velocity.x * 0.002)
 		rotation = clamp(rotation, -0.1, 0.1)
 	
