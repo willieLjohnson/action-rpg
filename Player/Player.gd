@@ -43,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		ATTACK:
 			attack_state()
 	
+	
 
 func move_state(delta: float) -> void:
 	var input_vector = Vector2.ZERO
@@ -62,14 +63,24 @@ func move_state(delta: float) -> void:
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-		
+		rotation /= 2
+	
+	if input_vector.y != 0 && input_vector.x == 0:
+		rotation /= 2
+	else:
+		rotate(velocity.x * 0.002)
+		rotation = clamp(rotation, -0.1, 0.1)
+	
 	move()
+	
 	
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
+		rotation = 0
 		
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
+		rotation = 0
 
 func roll_state() -> void:
 	velocity = roll_vector * ROLL_SPEED
